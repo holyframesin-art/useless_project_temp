@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="മലയാളം മൂവി റൗലറ്റ് 💀 - മോശം മലയാള സിനിമകൾ ശുപാർശ ചെയ്ത് നിങ്ങളുടെ സിനിമാ ടേസ്റ്റിനെ പച്ചയായി കളിയാക്കുന്ന വെബ്സൈറ്റ്.">
+  <title>മലയാളം മൂവി റൗലറ്റ് 💀 | നിങ്ങളുടെ സമയം വെറുതെ കളയൂ!</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="logo-group">
+        <span class="logo-skull" role="img" aria-label="തലയോട്ടി">💀</span>
+        <div>
+          <h1 class="site-title">മലയാളം മൂവി റൗലറ്റ്</h1>
+          <p class="site-tagline">"നല്ല പടങ്ങൾ കണ്ടാൽ ദഹിക്കാത്തവർക്ക് വേണ്ടിയുള്ള പ്രത്യേക സേവനം!"</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="counter-pill" title="നിങ്ങൾ സ്വയം കണ്ടു മുടിഞ്ഞ സിനിമകളുടെ എണ്ണം">
+          <span>കണ്ടു തീർത്ത അബദ്ധങ്ങൾ:</span>
+          <span id="counterValue" class="counter-number">0</span>
+        </div>
+        <button id="btnToggleSound" class="btn btn-secondary btn-icon-only" title="ശബ്ദം ഓൺ/ഓഫ് ചെയ്യുക" aria-label="Toggle Sound">🔊</button>
+        <button id="btnOpenFavorites" class="btn btn-secondary" title="സേവ് ചെയ്ത അബദ്ധങ്ങൾ കാണുക">❤️ സേവ് ചെയ്ത മണ്ടത്തരങ്ങൾ (<span id="favCountBadge">0</span>)</button>
+        <button id="btnOpenHistory" class="btn btn-secondary" title="നേരത്തെ കണ്ട സിനിമകളുടെ പട്ടിക">📜 നാണക്കേടിന്റെ ചരിത്രം</button>
+        <button id="btnResetShame" class="btn btn-secondary" title="കൗണ്ടറും ചരിത്രവും മായ്‌ക്കുക">🗑 തെറ്റുകൾ മായ്‌ക്കുക</button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <p class="hero-subhead">
+        മുന്നറിയിപ്പ്: ഇവിടെയുള്ളത് <em>യഥാർത്ഥത്തിൽ റിലീസ് ചെയ്ത</em> പച്ചയായ ദുരന്തങ്ങൾ മാത്രമാണ്. ബാക്കി വരുന്ന മാനസിക പ്രയാസങ്ങൾക്ക് കമ്പനി ഉത്തരവാദിയല്ല!
+      </p>
+
+      <!-- Main Action Buttons -->
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 8px;">
+        <button id="btnRuinEvening" class="btn btn-primary-glow">
+          🎲 എന്റെ സമയം വെറുതെ കളയൂ!
+        </button>
+        <button id="btnHeroStartFirst" class="btn btn-secondary" title="ആദ്യം മുതൽ വീണ്ടും തുടങ്ങുക">
+          🔄 ആദ്യം മുതൽ തുടങ്ങുക
+        </button>
+      </div>
+
+      <!-- Curated Category Triggers -->
+      <div class="category-group">
+        <button id="btnCatBottom" class="btn btn-pill" title="4.0-ന് താഴെയുള്ള പടുകുഴി">💀 ജീവിക്കാൻ കൊതിയില്ലാത്തവർക്ക് (&lt; 4.0)</button>
+        <button id="btnCatOverHyped" class="btn btn-pill" title="വൻ ഹൈപ്പിൽ വന്ന് എട്ടുനിലയിൽ പൊട്ടിയവ">🎪 കോടികൾ വെള്ളത്തിലൊഴിച്ചവ</button>
+        <button id="btnCatAccidental" class="btn btn-pill" title="ഗൗരവത്തിൽ എടുത്ത് ഒടുവിൽ കോമഡിയായവ">🤨 അറിയാതെ ചിരിച്ചു പോകുന്നവ</button>
+        <button id="btnCatPureRegret" class="btn btn-pill" title="യാതൊരു ത്രില്ലുമില്ലാത്ത ശുദ്ധ പാഴ്ജന്മം">📉 ശുദ്ധ പാഴ്ജന്മം</button>
+      </div>
+    </section>
+
+    <!-- Multi-Attribute Filters & Search Bar -->
+    <section class="filter-bar" aria-label="സിനിമ ഫിൽട്ടറുകൾ">
+      <div class="search-input-wrap">
+        <input 
+          type="text" 
+          id="movieSearch" 
+          class="input-control" 
+          placeholder="ഏത് അബദ്ധമാണ് തിരയുന്നത്? (സിനിമ, നടൻ, സംവിധായകൻ...)"
+          autocomplete="off"
+        >
+      </div>
+
+      <div>
+        <select id="filterGenre" class="input-control" aria-label="വിഭാഗം തിരിക്കുക">
+          <option value="ALL">എല്ലാ വിഭാഗങ്ങളും</option>
+        </select>
+      </div>
+
+      <div>
+        <select id="filterEra" class="input-control" aria-label="കാലഘട്ടം">
+          <option value="ALL">എല്ലാ കാലഘട്ടങ്ങളും</option>
+          <option value="2020s">2020-ന് ശേഷം</option>
+          <option value="2010s">2010 മുതൽ 2019 വരെ</option>
+          <option value="before2010">2010-ന് മുൻപ്</option>
+        </select>
+      </div>
+
+      <div>
+        <select id="filterMaxRating" class="input-control" aria-label="റേറ്റിംഗ് പരിധി">
+          <option value="ALL">എല്ലാ റേറ്റിംഗും (എല്ലാം ദുരന്തം തന്നെ)</option>
+          <option value="5.5">&le; 5.5 (കടുത്ത വേദന)</option>
+          <option value="5.0">&le; 5.0 (അപകട മേഖല)</option>
+          <option value="4.0">&le; 4.0 (കൊടും ദുരന്തം)</option>
+          <option value="3.5">&le; 3.5 (പാതാളം)</option>
+        </select>
+      </div>
+
+      <div>
+        <button id="btnResetFilters" class="btn btn-secondary" title="ഫിൽട്ടറുകൾ മാറ്റുക">ഫിൽട്ടർ മാറ്റുക</button>
+      </div>
+    </section>
+
+    <!-- Dynamic Regret Meter -->
+    <section class="regret-meter-card" aria-label="മാനസിക വിഷമ മീറ്റർ">
+      <div class="meter-header">
+        <span class="meter-title">നിന്റെ മാനസിക നില തെറ്റാനുള്ള സാധ്യത (Damage Meter)</span>
+        <span id="regretMeterValue" class="meter-percent">90%</span>
+      </div>
+      <div class="meter-track">
+        <div id="regretMeterFill" class="meter-fill meter-lethal" style="width: 90%;"></div>
+      </div>
+      <div id="regretMeterLabel" class="meter-label-text">
+        ഐസിയു അഡ്മിഷൻ ഉറപ്പാണ് 💀
+      </div>
+    </section>
+
+    <!-- Main Movie Recommendation Display Stage -->
+    <main id="movieStage" aria-live="polite">
+      <div class="movie-card" style="padding: 40px; text-align: center; color: var(--text-secondary);">
+        <p>നിങ്ങൾക്കായുള്ള പുതിയ അബദ്ധം തപ്പിയെടുക്കുന്നു...</p>
+      </div>
+    </main>
+
+    <!-- Achievements Section -->
+    <section class="achievements-section">
+      <h3 class="section-title">🏆 സിനിമാ ടേസ്റ്റ് അധഃപതന നാഴികക്കല്ലുകൾ</h3>
+      <div id="achievementsList" class="achievements-grid">
+        <!-- Rendered by ui.js -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>
+        <strong>മലയാളം മൂവി റൗലറ്റ് 💀</strong> — നല്ല പടം കാണാൻ ആരും പറഞ്ഞു തരാത്ത പാവങ്ങൾക്ക് സമർപ്പിക്കുന്നു.
+      </p>
+      <p style="margin-top: 6px; font-size: 0.75rem;">
+        റേറ്റിംഗുകളും അഭിനേതാക്കളുടെ വിവരങ്ങളും IMDb-ൽ നിന്നുള്ള യഥാർത്ഥ വിവരങ്ങളാണ്. ഇവിടെ വരുന്ന എല്ലാ മാനസിക ബുദ്ധിമുട്ടുകൾക്കും നിങ്ങൾ മാത്രമാണ് ഉത്തരവാദി.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Sliding Drawer: History (Hall of Shame) -->
+  <aside id="drawerHistory" class="drawer" aria-label="നാണക്കേടിന്റെ ചരിത്രം">
+    <div class="drawer-header">
+      <h3 class="drawer-title">📜 നാണക്കേടിന്റെ ചരിത്രം</h3>
+      <button id="btnCloseHistory" class="drawer-close" aria-label="ക്ലോസ് ചെയ്യുക">✕</button>
+    </div>
+    <div id="historyList" class="drawer-body">
+      <!-- Rendered dynamically -->
+    </div>
+  </aside>
+
+  <!-- Sliding Drawer: Favorites (Saved Mistakes) -->
+  <aside id="drawerFavorites" class="drawer" aria-label="സേവ് ചെയ്ത മണ്ടത്തരങ്ങൾ">
+    <div class="drawer-header">
+      <h3 class="drawer-title">❤️ സേവ് ചെയ്ത മണ്ടത്തരങ്ങൾ</h3>
+      <button id="btnCloseFavorites" class="drawer-close" aria-label="ക്ലോസ് ചെയ്യുക">✕</button>
+    </div>
+    <div id="favoritesList" class="drawer-body">
+      <!-- Rendered dynamically -->
+    </div>
+  </aside>
+
+  <!-- Rock Bottom Catastrophe Modal -->
+  <div id="rockBottomModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="rockBottomTitle">
+    <div class="modal-content">
+      <span class="modal-skull-icon">🪦</span>
+      <h2 id="rockBottomTitle" class="modal-title">നീ പാതാളത്തിൽ എത്തിക്കഴിഞ്ഞു!</h2>
+      <p class="modal-body-text">
+        നിങ്ങൾ ഇപ്പോൾ കാണുന്നത് <strong id="lowestMovieTitle">സലാം കാശ്മീർ</strong> ആണ്. യഥാർത്ഥ റേറ്റിംഗ്: <strong id="lowestMovieRating">3.1/10</strong>!
+        <br><br>
+        ഇതിൽ താഴെ ഇനി മറ്റൊരു സിനിമ മലയാളത്തിൽ പോലുമില്ല! ദൈവത്തെ ഓർത്ത് ഫോൺ താഴെ വെച്ചിട്ട് പോയി വല്ലതും പഠിക്കാൻ നോക്ക്!
+      </p>
+      <button id="btnModalStartFirst" class="btn btn-primary-glow" style="width: 100%;">
+        🔄 ആദ്യം മുതൽ തുടങ്ങുക (രക്ഷപ്പെടാനുള്ള വഴി)
+      </button>
+      <button id="btnCloseRockBottom" class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
+        ഞാൻ എന്റെ തെറ്റ് സമ്മതിക്കുന്നു (രക്ഷിക്കണേ)
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="assertive"></div>
+
+  <!-- Scripts -->
+  <script src="./js/movies.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

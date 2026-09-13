@@ -1,0 +1,390 @@
+/**
+ * Malayalam Movie Roulette 💀 - Verified Real Movie Database & Sarcastic Commentary
+ */
+
+const BACKUP_MOVIES_DATA = [
+  {
+    "id": 1,
+    "title": "Salam Kashmier",
+    "year": 2014,
+    "genre": ["Action", "Drama"],
+    "rating": 3.1,
+    "director": "Joshiy",
+    "cast": ["Jayaram", "Suresh Gopi", "Mia George"],
+    "description": "ഇന്ത്യയും പാകിസ്ഥാനും തമ്മിലുള്ള യുദ്ധമാണോ അതോ പ്രേക്ഷകനും സിനിമയും തമ്മിലുള്ള യുദ്ധമാണോ എന്ന് തിരിച്ചറിയാൻ പറ്റാത്ത ഒരു സൈനിക അത്ഭുതം!",
+    "category": ["absoluteBottom", "random", "pureRegret"]
+  },
+  {
+    "id": 2,
+    "title": "White",
+    "year": 2016,
+    "genre": ["Romance", "Drama"],
+    "rating": 3.2,
+    "director": "Uday Ananthan",
+    "cast": ["Mammootty", "Huma Qureshi", "Siddique"],
+    "description": "ലണ്ടനിലെ കൊടും തണുപ്പിൽ പ്രായവ്യത്യാസമില്ലാത്ത പ്രണയം അഭിനയിച്ചു കാണിച്ച് പ്രേക്ഷകന്റെ കണ്ണിൽ നിന്നും ചോര വരുത്തിയ ക്ലാസിക് ഐറ്റം!",
+    "category": ["absoluteBottom", "random", "pureRegret"]
+  },
+  {
+    "id": 3,
+    "title": "Jack N Jill",
+    "year": 2022,
+    "genre": ["Sci-Fi", "Comedy"],
+    "rating": 3.4,
+    "director": "Santosh Sivan",
+    "cast": ["Manju Warrier", "Kalidas Jayaram", "Soubin Shahir"],
+    "description": "ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസ് പഠിപ്പിക്കാൻ വന്ന് പ്രേക്ഷകന്റെ സ്വതസിദ്ധമായ ഇന്റലിജൻസ് കൂടി തല്ലിക്കെടുത്തിയ വിഷ്വൽ ഷോക്ക്!",
+    "category": ["absoluteBottom", "random", "accidentalComedy"]
+  },
+  {
+    "id": 4,
+    "title": "Dance Dance",
+    "year": 2017,
+    "genre": ["Drama"],
+    "rating": 3.6,
+    "director": "Nisar",
+    "cast": ["Mukesh", "Jagathy Sreekumar", "Rahman"],
+    "description": "ഡാൻസ് പഠിപ്പിക്കാൻ ഇറങ്ങി ഒടുവിൽ സിനിമ കണ്ടവരെ ഒന്നടങ്കം വട്ടക്കളി കളിപ്പിച്ച കൊടും അത്ഭുതം!",
+    "category": ["absoluteBottom", "random"]
+  },
+  {
+    "id": 5,
+    "title": "Alone",
+    "year": 2023,
+    "genre": ["Mystery", "Thriller"],
+    "rating": 3.5,
+    "director": "Shaji Kailas",
+    "cast": ["Mohanlal"],
+    "description": "ഒരു ഫ്ലാറ്റിൽ ഒറ്റപ്പെട്ടുപോയ നായകൻ... പക്ഷെ യഥാർത്ഥത്തിൽ ഒറ്റപ്പെട്ടു പോയത് തിയേറ്ററിൽ ബാക്കിയായ പാവം പ്രേക്ഷകനായിരുന്നു!",
+    "category": ["absoluteBottom", "random", "pureRegret"]
+  },
+  {
+    "id": 6,
+    "title": "Lailaa O Lailaa",
+    "year": 2015,
+    "genre": ["Action", "Thriller"],
+    "rating": 3.8,
+    "director": "Joshiy",
+    "cast": ["Mohanlal", "Amala Paul", "Sathyaraj"],
+    "description": "ഭാര്യയും ഭർത്താവും കൂടെ രഹസ്യാന്വേഷണം നടത്തി ഒടുവിൽ പ്രേക്ഷകന്റെ ക്ഷമയുടെ അതിര് അന്വേഷിച്ചു കണ്ടുപിടിച്ച ഒരു ആക്ഷൻ പടം!",
+    "category": ["absoluteBottom", "random", "pureRegret"]
+  },
+  {
+    "id": 7,
+    "title": "Aaraattu",
+    "year": 2022,
+    "genre": ["Action", "Comedy"],
+    "rating": 3.9,
+    "director": "B. Unnikrishnan",
+    "cast": ["Mohanlal", "Shraddha Srinath", "Ramachandra Raju"],
+    "description": "കറുത്ത കണ്ണടയും കറുത്ത കാറുമെടുത്ത് വന്ന് 'ഞാൻ നെയ്യാറ്റിൻകര ഗോപനാണെ' എന്ന് കാറി വിളിച്ച് നാട്ടുകാരെ മൊത്തം തല്ലിപ്പരത്തുന്ന 2.5 മണിക്കൂർ ഒച്ചപ്പാട്!",
+    "category": ["absoluteBottom", "random", "overHyped"]
+  },
+  {
+    "id": 8,
+    "title": "Achayans",
+    "year": 2017,
+    "genre": ["Comedy", "Thriller"],
+    "rating": 4.0,
+    "director": "Kannan Thamarakkulam",
+    "cast": ["Jayaram", "Unni Mukundan", "Amala Paul"],
+    "description": "കുറേ ചേട്ടന്മാർ കുടിച്ച് കൂത്താടി ഒടുവിൽ ഒരു കൊലപാതക കേസിൽ ചെന്ന് ചാടി പ്രേക്ഷകന്റെ മനസ്സമാധാനം കളഞ്ഞ കോമഡി!",
+    "category": ["pureRegret", "random"]
+  },
+  {
+    "id": 9,
+    "title": "Monster",
+    "year": 2022,
+    "genre": ["Crime", "Thriller"],
+    "rating": 4.2,
+    "director": "Vysakh",
+    "cast": ["Mohanlal", "Lakshmi Manchu", "Honey Rose"],
+    "description": "ലക്കി സിംഗ് എന്ന പേരിൽ തലപ്പാവ് വെച്ച് വന്ന് മലയാളികളെ ഒന്നടങ്കം ഞെട്ടിക്കാൻ നോക്കി, ഒടുവിൽ എല്ലാവരും കൈയ്യൊഴിഞ്ഞ ഐറ്റം!",
+    "category": ["pureRegret", "random"]
+  },
+  {
+    "id": 10,
+    "title": "Big Brother",
+    "year": 2020,
+    "genre": ["Action", "Drama"],
+    "rating": 4.2,
+    "director": "Siddique",
+    "cast": ["Mohanlal", "Arbaaz Khan", "Anoop Menon"],
+    "description": "ജയിലിൽ നിന്ന് ഇറങ്ങിയ ഏട്ടൻ അനുജന്മാരെ രക്ഷിക്കാൻ വേണ്ടി സകല ഗുണ്ടകളെയും കാറ്റിൽ പറത്തുന്ന ഒരു പതിവ് തല്ല് മാലപ്പടക്കം!",
+    "category": ["pureRegret", "random", "overHyped"]
+  },
+  {
+    "id": 11,
+    "title": "College Kumaran",
+    "year": 2008,
+    "genre": ["Drama", "Comedy"],
+    "rating": 4.3,
+    "director": "Thulasidas",
+    "cast": ["Mohanlal", "Vimala Raman", "Siddique"],
+    "description": "കോളേജ് കാന്റീനിൽ ചോറ് വിളമ്പുന്ന ചേട്ടൻ കോളേജിലെ സകല പ്രശ്നങ്ങളും അടിച്ചു തീർക്കുന്ന വിപ്ലവ അഭ്യാസം!",
+    "category": ["pureRegret", "random", "accidentalComedy"]
+  },
+  {
+    "id": 12,
+    "title": "China Town",
+    "year": 2011,
+    "genre": ["Comedy"],
+    "rating": 4.4,
+    "director": "Rafi Mecartin",
+    "cast": ["Mohanlal", "Jayaram", "Dileep"],
+    "description": "കാസിനോ നടത്തി പണക്കാരാവാൻ ഗോവയിൽ പോയ മൂന്ന് പേർ... പക്ഷെ സിനിമ കണ്ട് തീർന്നപ്പോൾ പ്രേക്ഷകന്റെ പോക്കറ്റും മനസ്സും ഒരുപോലെ പാപ്പരായി!",
+    "category": ["pureRegret", "random", "accidentalComedy"]
+  },
+  {
+    "id": 13,
+    "title": "Lokanathan IAS",
+    "year": 2005,
+    "genre": ["Comedy", "Action"],
+    "rating": 4.4,
+    "director": "Anil",
+    "cast": ["Kalabhavan Mani", "Ranjitha", "Kalabhavan Navas"],
+    "description": "ഓട്ടോ ഡ്രൈവർ ഐഎഎസ് കാരനായപ്പോൾ നാട്ടുനടപ്പുകൾ മാറിമറിഞ്ഞു... കൂടെ സിനിമ കണ്ടവരുടെ ബിപിയും കൂടി!",
+    "category": ["accidentalComedy", "random"]
+  },
+  {
+    "id": 14,
+    "title": "Thrissur Pooram",
+    "year": 2019,
+    "genre": ["Action"],
+    "rating": 4.5,
+    "director": "Rajesh Mohanan",
+    "cast": ["Jayasurya", "Swathi Reddy", "Vijay Babu"],
+    "description": "തൃശ്ശൂർ റൗണ്ടിൽ ഗുണ്ടായിസം കാണിച്ച് ശബ്ദകോലാഹലങ്ങൾ കൊണ്ട് ചെവി അടപ്പിച്ചു തന്ന ഒരു അടിപൊളി തലവേദന!",
+    "category": ["pureRegret", "random"]
+  },
+  {
+    "id": 15,
+    "title": "Gold",
+    "year": 2022,
+    "genre": ["Comedy", "Drama"],
+    "rating": 4.8,
+    "director": "Alphonse Puthren",
+    "cast": ["Prithviraj Sukumaran", "Nayanthara", "Mallika Sukumaran"],
+    "description": "ഒരു വണ്ടിയുടെ ഉള്ളിൽ സ്വർണ്ണം ഇരിപ്പുണ്ടെന്ന് അറിയാൻ 3 മണിക്കൂർ നേരം ചുറ്റുമുള്ള പൂക്കളും വണ്ടുകളും കാണിച്ച് നമ്മളെ പരീക്ഷിച്ച എഡിറ്റിംഗ് മാജിക്!",
+    "category": ["overHyped", "random", "pureRegret"]
+  },
+  {
+    "id": 16,
+    "title": "Ittymaani: Made in China",
+    "year": 2019,
+    "genre": ["Comedy", "Drama"],
+    "rating": 4.9,
+    "director": "Jibi-Joju",
+    "cast": ["Mohanlal", "Radhika Sarathkumar", "Honey Rose"],
+    "description": "ചൈനയിൽ ജനിച്ച കുന്നംകുളത്തുകാരൻ അമ്മയെ കെട്ടിക്കാൻ ഇറങ്ങിത്തിരിച്ച് ഒടുവിൽ പ്രേക്ഷകരെ കണ്ണീരിലാഴ്ത്തിയ തമാശ നാടകം!",
+    "category": ["accidentalComedy", "random"]
+  },
+  {
+    "id": 17,
+    "title": "Masterpiece",
+    "year": 2017,
+    "genre": ["Action", "Thriller"],
+    "rating": 5.1,
+    "director": "Ajai Vasudev",
+    "cast": ["Mammootty", "Unni Mukundan", "Varalaxmi Sarathkumar"],
+    "description": "കോളേജിലെ പിള്ളേരെ നന്നാക്കാൻ വന്ന് കൈയിൽ കിട്ടിയവരെയൊക്കെ എടുത്ത് തറയിലടിക്കുന്ന ഒരു പ്രൊഫസറുടെ അഴിഞ്ഞാട്ടം!",
+    "category": ["accidentalComedy", "random", "overHyped"]
+  },
+  {
+    "id": 18,
+    "title": "King Liar",
+    "year": 2016,
+    "genre": ["Comedy"],
+    "rating": 5.2,
+    "director": "Lal",
+    "cast": ["Dileep", "Madonna Sebastian", "Lal"],
+    "description": "വായ തുറന്നാൽ കള്ളം മാത്രം പറയുന്ന ഒരുത്തൻ ഫാഷൻ സാമ്രാജ്യം പിടിച്ചടക്കാൻ പോയി പ്രേക്ഷകന്റെ ക്ഷമ പരീക്ഷിച്ച തമാശ!",
+    "category": ["accidentalComedy", "random"]
+  },
+  {
+    "id": 19,
+    "title": "CBI 5: The Brain",
+    "year": 2022,
+    "genre": ["Mystery", "Thriller"],
+    "rating": 5.2,
+    "director": "K. Madhu",
+    "cast": ["Mammootty", "Mukesh", "Jagathy Sreekumar"],
+    "description": "ബാസ്‌ക്കറ്റ് കില്ലിംഗ് എന്ന പേരിൽ ഒരു പെൻസിൽ കട്ടപ്പാരയും വെച്ച് ആലോചിച്ച് ആലോചിച്ച് ഒടുവിൽ പ്രേക്ഷകന്റെ തലച്ചോറ് പുകച്ച സിബിഐ അന്വേഷണം!",
+    "category": ["overHyped", "random", "pureRegret"]
+  },
+  {
+    "id": 20,
+    "title": "Kasaba",
+    "year": 2016,
+    "genre": ["Action", "Crime"],
+    "rating": 5.3,
+    "director": "Nithin Renji Panicker",
+    "cast": ["Mammootty", "Varalaxmi Sarathkumar", "Neha Saxena"],
+    "description": "പോലീസ് സ്റ്റേഷനിലെ ജീപ്പ് വലിച്ച് നിർത്തി മീശ പിരിച്ച് കാക്കി യൂണിഫോമിനെ തന്നെ നാണിപ്പിച്ച സബ് ഇൻസ്‌പെക്ടറുടെ മാസ്സ് കാട്ടിക്കൂട്ടലുകൾ!",
+    "category": ["overHyped", "random"]
+  },
+  {
+    "id": 21,
+    "title": "Odiyan",
+    "year": 2018,
+    "genre": ["Fantasy", "Action"],
+    "rating": 5.3,
+    "director": "V. A. Shrikumar",
+    "cast": ["Mohanlal", "Manju Warrier", "Prakash Raj"],
+    "description": "ഒരു കറുത്ത പുതപ്പും പുതച്ച് പാതിരാത്രി നാട്ടുകാരെ പേടിപ്പിക്കാൻ ഇറങ്ങിയ മാണിക്യൻ... ഒടുവിൽ കഞ്ഞി കുടിച്ച് തീർത്ത ചരിത്ര ദുരന്തം!",
+    "category": ["overHyped", "random"]
+  },
+  {
+    "id": 22,
+    "title": "Love Action Drama",
+    "year": 2019,
+    "genre": ["Romantic Comedy"],
+    "rating": 5.4,
+    "director": "Dhyan Sreenivasan",
+    "cast": ["Nivin Pauly", "Nayanthara", "Aju Varghese"],
+    "description": "കുടിയനും തെമ്മാടിയുമായ ഒരുത്തനെ നന്നാക്കാൻ ശ്രമിച്ച് സ്വന്തം ജീവിതവും സായാഹ്നവും നഷ്ടപ്പെടുത്തിയ ഒരു പാവം പെൺകുട്ടിയുടെ കഥ!",
+    "category": ["overHyped", "random"]
+  },
+  {
+    "id": 23,
+    "title": "Shylock",
+    "year": 2020,
+    "genre": ["Action", "Comedy"],
+    "rating": 5.4,
+    "director": "Ajai Vasudev",
+    "cast": ["Mammootty", "Rajkiran", "Meena"],
+    "description": "പൈസ തിരിച്ചു ചോദിക്കാൻ വന്ന് പഴയ സിനിമയിലെ ഡയലോഗുകൾ മൊത്തം ഉറക്കെ വിളിച്ച് പറഞ്ഞ് ഒടുവിൽ തിയേറ്ററിന്റെ സ്പീക്കർ വരെ അടിച്ചുപോയ ആക്ഷൻ ബഹളം!",
+    "category": ["accidentalComedy", "random"]
+  },
+  {
+    "id": 24,
+    "title": "Mamangam",
+    "year": 2019,
+    "genre": ["Historical", "Action"],
+    "rating": 5.6,
+    "director": "M. Padmakumar",
+    "cast": ["Mammootty", "Unni Mukundan", "Prachi Tehlan"],
+    "description": "നൂറ്റാണ്ടുകൾക്ക് മുൻപ് നടന്ന മാമാങ്കം കാണിക്കാൻ ഇറങ്ങി ഒടുവിൽ ഡബ്ബിംഗും വിഗ്ഗും കണ്ട് പ്രേക്ഷകർ നെഞ്ചത്ത് കൈവെച്ച ചരിത്ര പടം!",
+    "category": ["overHyped", "random"]
+  },
+  {
+    "id": 25,
+    "title": "Marakkar: Arabikadalinte Simham",
+    "year": 2021,
+    "genre": ["Historical", "Action"],
+    "rating": 5.8,
+    "director": "Priyadarshan",
+    "cast": ["Mohanlal", "Suniel Shetty", "Arjun Sarja"],
+    "description": "പോർച്ചുഗീസുകാരെ തോൽപ്പിക്കാൻ പോയി ഒടുവിൽ തിയേറ്ററിൽ വന്ന പാവം പ്രേക്ഷകരെ ഒന്നടങ്കം തോൽപ്പിച്ച 100 കോടി കടൽയുദ്ധം!",
+    "category": ["overHyped", "random"]
+  },
+  {
+    "id": 26,
+    "title": "Double Barrel",
+    "year": 2015,
+    "genre": ["Cult", "Absurdist Comedy"],
+    "rating": 6.1,
+    "director": "Lijo Jose Pellissery",
+    "cast": ["Prithviraj Sukumaran", "Indrajith Sukumaran", "Arya"],
+    "description": "ലൈല എന്നും മജ്നു എന്നും പേരുള്ള രണ്ട് തോക്കുകൾക്ക് വേണ്ടി കോമാളി വേഷം കെട്ടി വെടിവെച്ചു കളിച്ച ഒരു അന്താരാഷ്ട്ര കൺഫ്യൂഷൻ!",
+    "category": ["accidentalComedy", "random"]
+  }
+];
+
+class MovieDatabase {
+  constructor() {
+    this.movies = [];
+    this.isLoaded = false;
+  }
+
+  async loadMovies() {
+    try {
+      const response = await fetch("./data/movies.json");
+      if (!response.ok) throw new Error("HTTP error " + response.status);
+      this.movies = await response.json();
+      this.isLoaded = true;
+      return this.movies;
+    } catch (err) {
+      console.warn("Could not fetch data/movies.json directly (likely file:/// origin). Falling back to embedded dataset.", err);
+      this.movies = [...BACKUP_MOVIES_DATA];
+      this.isLoaded = true;
+      return this.movies;
+    }
+  }
+
+  getRandomMovie(pool = null) {
+    const list = pool && pool.length > 0 ? pool : this.movies;
+    if (!list || list.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * list.length);
+    return list[randomIndex];
+  }
+
+  getAbsoluteBottomMovies() {
+    return this.movies.filter(m => m.rating < 4.0);
+  }
+
+  getOverHypedDisasters() {
+    return this.movies.filter(m => m.category.includes("overHyped"));
+  }
+
+  getAccidentalComedyMovies() {
+    return this.movies.filter(m => m.category.includes("accidentalComedy"));
+  }
+
+  getPureRegretMovies() {
+    return this.movies.filter(m => m.category.includes("pureRegret"));
+  }
+
+  getWorseMovie(currentRating) {
+    if (typeof currentRating !== "number") return null;
+    const lowerMovies = this.movies.filter(m => m.rating < currentRating);
+    if (lowerMovies.length === 0) return null;
+
+    const randomIndex = Math.floor(Math.random() * lowerMovies.length);
+    return lowerMovies[randomIndex];
+  }
+
+  searchMovies(query) {
+    if (!query || typeof query !== "string") return [...this.movies];
+    const cleanQ = query.trim().toLowerCase();
+    if (!cleanQ) return [...this.movies];
+
+    return this.movies.filter(m => {
+      const matchTitle = m.title.toLowerCase().includes(cleanQ);
+      const matchDirector = m.director.toLowerCase().includes(cleanQ);
+      const matchCast = Array.isArray(m.cast) && m.cast.some(actor => actor.toLowerCase().includes(cleanQ));
+      const matchGenre = Array.isArray(m.genre) && m.genre.some(g => g.toLowerCase().includes(cleanQ));
+      return matchTitle || matchDirector || matchCast || matchGenre;
+    });
+  }
+
+  filterMovies({ genre = "ALL", era = "ALL", maxRating = null }) {
+    return this.movies.filter(m => {
+      if (genre !== "ALL") {
+        if (!m.genre.some(g => g.toLowerCase() === genre.toLowerCase())) return false;
+      }
+
+      if (era !== "ALL") {
+        if (era === "2010s" && (m.year < 2010 || m.year > 2019)) return false;
+        if (era === "2020s" && m.year < 2020) return false;
+        if (era === "before2010" && m.year >= 2010) return false;
+      }
+
+      if (typeof maxRating === "number" && maxRating > 0) {
+        if (m.rating > maxRating) return false;
+      }
+
+      return true;
+    });
+  }
+
+  getAllGenres() {
+    const genres = new Set();
+    this.movies.forEach(m => {
+      if (Array.isArray(m.genre)) m.genre.forEach(g => genres.add(g));
+    });
+    return Array.from(genres).sort();
+  }
+}
+
+window.movieDB = new MovieDatabase();
